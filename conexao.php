@@ -14,13 +14,16 @@
 	#}
 	
 	#pg_query($con, "insert into jogador values (
-	#	11, 'Guilherme', 'Masculino', '2000/06/08', 'Blitz', 11, 1, 1);
+	#	11, 'Paulo', 'Masculino', '2000/10/30', 'Blitz', 11, 1, 'PauloVBM', 'pv123', 1);
 	#");
 	
 	#pg_query($con, 
 	#"update jogador set nome_completo = 'Guilherme Augusto'
-	#	where id = 11;"
+	#	where id = 1;"
 	#);
+	
+	#pg_query($con,
+	#"delete from jogador where nome_completo = 'Guilherme')";
 	
 	#@pg_close($con);
 ?>

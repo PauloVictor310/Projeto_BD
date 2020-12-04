@@ -33,6 +33,12 @@
 				<option value="1">1</option>
 			</select><br><br>
 			
+			<label for="login">Login:</label><br>
+			<input type="text" name="login" placeholder="Digite um nome de usuário." size="25"><br><br>
+			
+			<label for="senha">Senha:</label><br>
+			<input type="text" name="senha" placeholder="Digite uma senha." size="25"><br><br>
+			
 			<label for="id_time">Número do Time:</label><br>
 			<input type="number" name="id_time"><br><br>
 
