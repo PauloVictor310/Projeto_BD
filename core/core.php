@@ -1,6 +1,6 @@
 <?php
 
-Class Core()
+Class Core
 {
 
 	public function __construct()
@@ -22,14 +22,14 @@ Class Core()
 			$url = explode('/', $url);
 			$controller = $url[0].'Controller';
 			array_shift($url);
-
-			if (isset($url[0]) && !empty($url)) 
+			//Se o user mandou função
+			if (isset($url[0]) && !empty($url[0])) 
 			{
-				$metodo=$url;
+				$metodo=$url[0];
 				array_shift($url);
-			}else
+			}else //enviou somente a classe
 			{
-				$metodo='index';
+				$metodo = 'index';
 			}
 
 
@@ -37,13 +37,13 @@ Class Core()
 			{
 				$parametros = $url;
 			}
-		}else
+		}else //site.com
 		{
 			$controller = 'homeController';
 			$metodo = 'index';
 		}
-		$caminho = 'Projeto_BD/controller/'.$controller.'.php'
-		if (!file_exists($caminho) && !method_exists($controller, $metodo) 
+		$caminho = 'Projeto_BD/Controllers/'.$controller.'.php';
+		if (!file_exists($caminho) && !method_exists($controller, $metodo))
 		{
 			$controller = 'homeController';
 			$metodo = 'index';
@@ -54,3 +54,4 @@ Class Core()
 
 }
 
+?>

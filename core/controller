@@ -1,11 +1,11 @@
 <?php
-	Class controller{
+	Class Controller{
 		public $dados;
 
 		//Chamado por todos os CONTROLLERS
 		public function carregarTemplate($nomeView, $dadosModel = array()) 
 		{
-		Sthis->dados = $dadosModel;
+		$this->dados = $dadosModel;
 		require 'views/template.php';
 		}
 
@@ -21,3 +21,4 @@
 
 
 	}
+?>
