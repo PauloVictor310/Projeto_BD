@@ -7,7 +7,7 @@
 <body>
 <!--------------------------------------------------------->
 <?php
-	$this->carregarViewNoTemplate($nomeView);
+	$this->carregarViewNoTemplate($nomeView, $dadosModel);
 ?>
 <!--------------------------------------------------------->
 </body>

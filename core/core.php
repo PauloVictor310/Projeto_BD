@@ -11,6 +11,8 @@ Class Core
 
 	public function run()
 	{
+		$parametros = array();
+
 		if (isset($_GET['pag'])) 
 		{
 			$url = $_GET['pag'];
@@ -48,8 +50,8 @@ Class Core
 			$controller = 'homeController';
 			$metodo = 'index';
 		}
-		$c = new $controller;
-		call_user_func_array(array($c, $metodo), $parametros);
+		$a = new $controller;
+		call_user_func_array(array($a, $metodo), $parametros);
 	}
 
 }
