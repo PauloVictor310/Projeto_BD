@@ -12,10 +12,11 @@ Class Core
 	public function run()
 	{
 		$parametros = array();
-
+		$url =array();
 		if (isset($_GET['pag'])) 
 		{
 			$url = $_GET['pag'];
+
 		}
 
 		//Possui informação após o dominio 
