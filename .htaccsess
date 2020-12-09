@@ -1,4 +1,4 @@
-RewriteEngine ON
+RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /Projeto_BD/index.php?pag=$1
