@@ -12,14 +12,19 @@ Class Core
 	public function run()
 	{
 		$parametros = array();
-		if (isset($_GET['pag'])) 
+		if (isset( $_GET['pag'])) 
 		{
 			$url = $_GET['pag'];
+			echo $url;
 
 		}
 
 		//Possui informação após o dominio 
-		if (!empty($url)) 
+		if (empty($url)) 
+		{
+			$controller = 'homeController';
+			$metodo = 'index';
+		}else //site.com
 		{
 			$url = explode('/', $url);
 			$controller = $url[0].'Controller';
@@ -39,10 +44,7 @@ Class Core
 			{
 				$parametros = $url;
 			}
-		}else //site.com
-		{
-			$controller = 'homeController';
-			$metodo = 'index';
+
 		}
 		$caminho = 'Projeto_BD/Controllers/'.$controller.'.php';
 		if (!file_exists($caminho) && !method_exists($controller, $metodo))
