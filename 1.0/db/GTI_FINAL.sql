@@ -279,3 +279,50 @@ drop table tecnico;
 drop table time;
 drop table treino;
 
+
+-----------------------------
+------------VIEWS------------
+-----------------------------
+
+create view Times_de_Flag
+	(
+		select nome 
+		from time as T
+		where T.esporte = 'FlagFootball'
+		);
+
+-----------------------------
+------------REGRAS-----------
+-----------------------------
+create or replace rule r1 as
+	ON DELETE TO time DO INSERT INTO teste
+	VALUES (OLD.nome, OLD.estado, now());
+
+
+-----------------------------
+-----------FUNÇÕES-----------
+-----------------------------
+
+CREATE FUNCTION TESTE(float)  --Nome da Função
+RETURNS float 				  --Retorno
+SELECT AS 'SELECT ;'		  --Ação
+LANGUAGE 'sql';				  --Linguagem
+
+-----------------------------
+----------GATILHOS-----------
+-----------------------------
+
+CREATE LANGUAGE plpgsql;
+
+create function funcao_log() returns trigger as
+	$$
+	begin
+		insert into criando_um_log(data, usuario, modificação)
+			values (now(), user, TG_OP);
+		return new;
+	end;
+	$$ LANGUAGE 'plpgsql';
+
+CREATE TRIGGER teste_log
+AFTER INSERT OR UPDATE OR DELETE ON empregado
+FOR EACH ROW EXECUTE PROCEDURE funcao_log();
