@@ -354,6 +354,7 @@ create function funcao_log()
 
 -- Esse é o gatilho
 
+
 CREATE TRIGGER teste_log
 AFTER INSERT OR UPDATE OR DELETE ON *
 FOR EACH ROW EXECUTE PROCEDURE funcao_log();
