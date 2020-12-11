@@ -294,23 +294,46 @@ create view Times_de_Flag
 -----------------------------
 ------------REGRAS-----------
 -----------------------------
-create or replace rule r1 as
-	ON DELETE TO time DO INSERT INTO teste
-	VALUES (OLD.nome, OLD.estado, now());
+-- Exemplo de rule
+
+--create  or replace rule NomedaRule AS ON DELETE 
+	--TO TABELA WHERE(condição logica) 
+	--DO [also | insteade] {nothing | comando| Comando}
+
+-- Rule real
+
+CREATE TABLE log_entrada_equipamento(
+	nome varchar(50),
+	usuario  varchar(50),
+	data date);
+
+create  or replace rule log_entrada_equipamento AS ON INSERT 
+	TO equipamento WHERE(condição logica) 
+	DO also insert into log_entrada_equipamento
+	values(NEW.nome, current.user, now());
+
 
 
 -----------------------------
 -----------FUNÇÕES-----------
 -----------------------------
 
-CREATE FUNCTION TESTE(float)  --Nome da Função
-RETURNS float 				  --Retorno
-SELECT AS 'SELECT ;'		  --Ação
-LANGUAGE 'sql';				  --Linguagem
 
+
+CREATE FUNCTION Conta_jogadores(@time_nome varchar(100))  --Nome da Função
+RETURNS varchar as
+	begin
+			select
+			T.nome, count(J.sexo), J.sexo
+			from time as T, jogador as J
+			where T.id = J.id_time
+			order by J.sexo
+			returns select;	  
+	end
 -----------------------------
 ----------GATILHOS-----------
 -----------------------------
+-- Um gatilho aciona uma função, por isso é preciso criar uma
 
 CREATE LANGUAGE plpgsql;
 
@@ -322,6 +345,8 @@ create function funcao_log() returns trigger as
 		return new;
 	end;
 	$$ LANGUAGE 'plpgsql';
+
+-- Esse é o gatilho
 
 CREATE TRIGGER teste_log
 AFTER INSERT OR UPDATE OR DELETE ON empregado
