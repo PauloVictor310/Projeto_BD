@@ -334,14 +334,20 @@ RETURNS varchar as
 ----------GATILHOS-----------
 -----------------------------
 -- Um gatilho aciona uma função, por isso é preciso criar uma
+CREATE table log_sistema(
+	data date,
+	usuario varchar(50),
+	modificação varchar(50);
+	);
 
 CREATE LANGUAGE plpgsql;
 
-create function funcao_log() returns trigger as
+create function funcao_log() 
+	returns trigger as
 	$$
 	begin
-		insert into criando_um_log(data, usuario, modificação)
-			values (now(), user, TG_OP);
+		insert into log_sistema(data, usuario, modificação)
+			values (now(), current.user, TG_OP);
 		return new;
 	end;
 	$$ LANGUAGE 'plpgsql';
@@ -349,5 +355,5 @@ create function funcao_log() returns trigger as
 -- Esse é o gatilho
 
 CREATE TRIGGER teste_log
-AFTER INSERT OR UPDATE OR DELETE ON empregado
+AFTER INSERT OR UPDATE OR DELETE ON *
 FOR EACH ROW EXECUTE PROCEDURE funcao_log();
