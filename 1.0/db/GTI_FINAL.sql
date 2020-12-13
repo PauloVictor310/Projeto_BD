@@ -321,14 +321,15 @@ create  or replace rule log_entrada_equipamento AS ON INSERT
 
 
 CREATE FUNCTION Conta_jogadores(@time_nome varchar(100))  --Nome da Função
-RETURNS varchar as
+RETURNS @table (Time varchar(100),num_jogadores int, sexo varchar(10)) as
 	begin
+			insert into @table
 			select
 			T.nome, count(J.sexo), J.sexo
 			from time as T, jogador as J
 			where T.id = J.id_time
 			order by J.sexo
-			returns select;	  
+			return	  
 	end
 -----------------------------
 ----------GATILHOS-----------
