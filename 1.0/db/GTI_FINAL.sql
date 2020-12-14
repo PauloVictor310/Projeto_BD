@@ -339,9 +339,7 @@ CREATE table log_sistema(
 
 CREATE LANGUAGE plpgsql;
 
-create function funcao_log() 
-	returns trigger as
-	$$
+create function funcao_log() RETURNS trigger as $$
 	begin
 		insert into log_sistema(data, usuario, modificação)
 			values (now(), current.user, TG_OP);
